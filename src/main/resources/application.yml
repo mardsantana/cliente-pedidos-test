@@ -1,0 +1,14 @@
+server:
+  servlet:
+    context-path: /pedidos/api
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pedidos
+    username: postgres
+    password: 1998
+    driverClassName: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
