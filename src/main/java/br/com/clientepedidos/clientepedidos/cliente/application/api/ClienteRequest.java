@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 public class ClienteRequest {
     @NotBlank
-    private String nomeCompleto;
+    private String nome;
     @NotBlank
     @Email
     @Column(unique = true)

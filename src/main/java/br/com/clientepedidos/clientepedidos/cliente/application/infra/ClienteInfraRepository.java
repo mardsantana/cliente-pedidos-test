@@ -21,12 +21,12 @@ public class ClienteInfraRepository implements ClienteRepository {
         log.info("[finish] FormularioInfraRepository - save");
         return cliente;
     }
-//    @Override
-//    public Cliente buscaClienteAtravesNome(String nomeCompleto) {
-//        log.info("[start] ClienteInfraRepository - buscaClienteAtravesNome");
-//        Cliente cliente = (Cliente) clienteSpringDataJPARepository.findByNome(nomeCompleto)
-//                .orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
-//        log.info("[finish] ClienteInfraRepository - buscaClienteAtravesNome");
-//        return cliente;
-//    }
+    @Override
+    public Cliente buscaPorNome(String nome) {
+        log.info("[start] ClienteInfraRepository - buscaPorNome");
+        Cliente cliente = (Cliente) clienteSpringDataJPARepository.findByNome(nome)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+        log.info("[finish] ClienteInfraRepository - buscaPorNome");
+        return cliente;
+    }
 }

@@ -1,6 +1,7 @@
 package br.com.clientepedidos.clientepedidos.cliente.application.service;
 
 
+import br.com.clientepedidos.clientepedidos.cliente.application.api.ClienteAlteracaoRequest;
 import br.com.clientepedidos.clientepedidos.cliente.application.api.ClienteRequest;
 import br.com.clientepedidos.clientepedidos.cliente.application.api.ClienteResponse;
 import br.com.clientepedidos.clientepedidos.cliente.application.repository.ClienteRepository;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 public class ClienteApplicationService implements ClienteService{
 
     private final ClienteRepository clienteRepository;
-//    private final ClienteAlteracaoRequest clienteAlteracaoRequest;
 
     @Override
     public ClienteResponse criaUsuario(ClienteRequest clienteRequest) {
@@ -25,12 +25,12 @@ public class ClienteApplicationService implements ClienteService{
         return ClienteResponse.builder().idCliente(cliente.getIdCliente()).build();
     }
 
-//    @Override
-//    public void patchCliente(String nomeCompleto, ClienteAlteracaoRequest clientealteracaoRequest) {
-//        log.info("[start] ClienteApplicationService - patchCliente");
-//        Cliente cliente = clienteRepository.buscaClienteAtravesNome(nomeCompleto);
-//        cliente.altera(clienteAlteracaoRequest);
-//        clienteRepository.save(cliente);
-//        log.info("[finish] ClienteApplicationService - patchCliente");
-//    }
+    @Override
+    public void alteraCliente(String nome, ClienteAlteracaoRequest clienteAlteracaoRequest) {
+        log.info("[start] ClienteApplicationService - alteraCliente");
+        Cliente cliente = clienteRepository.buscaPorNome(nome);
+        cliente.altera(clienteAlteracaoRequest);
+        clienteRepository.save(cliente);
+        log.info("[finish] ClienteApplicationService - alteraCliente");
+    }
 }

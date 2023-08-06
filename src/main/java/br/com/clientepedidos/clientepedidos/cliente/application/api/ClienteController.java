@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.UUID;
 
 @RestController
 @Log4j2
@@ -25,16 +24,14 @@ public class ClienteController {
         log.info("[finish] ClienteController - postCliente");
         return clienteCriado;
     }
-
-//    @PatchMapping(value = "/{nome}")
-//    @ResponseStatus(code = HttpStatus.OK)
-//    public void patchCliente(@PathVariable String nomeCompleto, @Valid @RequestBody ClienteAlteracaoRequest clientealteracaoRequest){
-//        log.info("[start] ClienteController - patchCliente");
-//        log.info("[nomeCompleto] {}", nomeCompleto);
-//        clienteService.patchCliente(nomeCompleto, clientealteracaoRequest);
-//        log.info("[finish] ClienteController - patchCliente");
-//    }
-
+    @PatchMapping(value = "/{nome}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    void alteraCliente(@PathVariable String nome, @Valid @RequestBody ClienteAlteracaoRequest clienteAlteracaoRequest){
+        log.info("[start] ClienteController - alteraCliente");
+        log.info("[nome]{}", nome);
+        clienteService.alteraCliente(nome, clienteAlteracaoRequest);
+        log.info("[finish] ClienteController - alteraCliente");
+    }
 }
 
 //    Permitir o cadastro, alteração, deleção e consulta de clientes.

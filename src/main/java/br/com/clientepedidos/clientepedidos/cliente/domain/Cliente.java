@@ -14,13 +14,12 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@ToString
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idCliente;
     @NotBlank
-    private String nomeCompleto;
+    private String nome;
     @NotBlank
     @Email
     @Column(unique = true)
@@ -31,14 +30,14 @@ public class Cliente {
     private Sexo sexo;
 
     public Cliente(ClienteRequest clienteRequest) {
-        this.nomeCompleto = clienteRequest.getNomeCompleto();
+        this.nome = clienteRequest.getNome();
         this.email = clienteRequest.getEmail();
         this.telefone = clienteRequest.getTelefone();
         this.sexo = clienteRequest.getSexo();
     }
 
     public void altera(ClienteAlteracaoRequest clienteAlteracaoRequest) {
-        this.nomeCompleto = clienteAlteracaoRequest.getNomeCompleto();
+        this.nome = clienteAlteracaoRequest.getNome();
         this.email = clienteAlteracaoRequest.getEmail();
         this.telefone = clienteAlteracaoRequest.getTelefone();
         this.sexo = clienteAlteracaoRequest.getSexo();
