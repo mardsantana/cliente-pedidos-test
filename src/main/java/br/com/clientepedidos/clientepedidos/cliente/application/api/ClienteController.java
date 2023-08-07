@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Log4j2
@@ -24,14 +25,29 @@ public class ClienteController {
         log.info("[finish] ClienteController - postCliente");
         return clienteCriado;
     }
-    @PatchMapping(value = "/{nome}")
+    @PatchMapping(value = "/{email}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    void alteraCliente(@PathVariable String nome, @Valid @RequestBody ClienteAlteracaoRequest clienteAlteracaoRequest){
+    void alteraCliente(@PathVariable String email, @Valid @RequestBody ClienteAlteracaoRequest clienteAlteracaoRequest){
         log.info("[start] ClienteController - alteraCliente");
-        log.info("[nome]{}", nome);
-        clienteService.alteraCliente(nome, clienteAlteracaoRequest);
+        log.info("[email]{}", email);
+        clienteService.alteraCliente(email, clienteAlteracaoRequest);
         log.info("[finish] ClienteController - alteraCliente");
     }
+    @DeleteMapping(value = "/{email}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    void deleteClientePorEmail(@PathVariable String email) {
+        log.info("[start] ClienteController - deleteClientePorEmail");
+        log.info("[email]{}", email);
+        clienteService.deleteClientePorEmail(email);
+        log.info("[finish] ClienteController - deleteClientePorEmail");
+    }
+    @GetMapping(value = "/{email}")
+    @ResponseStatus(code = HttpStatus.OK)
+    List<ClienteList> listaClientePorEmail(){
+        log.info("[start] ClienteController - listaCliente");
+        List<ClienteList> cliente = clienteService.listaClientePorEmail();
+        log.info("[finish] ClienteController - listaCliente");
+        return cliente;
+    }
 }
-
 //    Permitir o cadastro, alteração, deleção e consulta de clientes.
