@@ -9,8 +9,9 @@ import br.com.clientepedidos.clientepedidos.cliente.application.api.ClienteRespo
 import java.util.List;
 
 public interface ClienteService {
-    ClienteResponse criaUsuario(ClienteRequest clienteRequest);
+    ClienteResponse criaCliente(ClienteRequest clienteRequest);
     void alteraCliente(String email, ClienteAlteracaoRequest clienteAlteracaoRequest);
     void deleteClientePorEmail(String email);
     List<ClienteList> listaClientePorEmail();
+//    ClienteRequest buscaPorEmail(String email);
 }

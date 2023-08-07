@@ -21,12 +21,33 @@ public class ClienteApplicationService implements ClienteService{
     private final ClienteRepository clienteRepository;
 
     @Override
-    public ClienteResponse criaUsuario(ClienteRequest clienteRequest) {
+    public ClienteResponse criaCliente(ClienteRequest clienteRequest) {
         log.info("[start] ClienteApplicationService - criaUsuario");
-        Cliente cliente = clienteRepository.save(new Cliente(clienteRequest));
+        Cliente cliente1 = new Cliente(clienteRequest);
+        log.info("cliente1 = {}", cliente1);
+        Cliente cliente = clienteRepository.save(cliente1);
+        log.info("clienteFinal = {}", cliente);
         log.info("[finish] ClienteApplicationService - criaUsuario");
         return ClienteResponse.builder().idCliente(cliente.getIdCliente()).build();
     }
+
+//    log.info("[start] GerenciadorApplicationService - criaCadastro");
+//    Gerenciador gerenciador1 = new Gerenciador(gerenciadorRequest);
+//    log.info("gerenciador1 = {}", gerenciador1);
+//    Gerenciador gerenciador = gerenciadorRepository.save(gerenciador1);
+//    log.info("gerenciadorFinal = {}", gerenciador);
+//    log.info("[finish] GerenciadorApplicationService - criaCadastro");
+//    return GerenciadorResponse.builder().idAnimal(gerenciador.getIdAnimal()).build();
+
+
+
+
+
+
+
+
+
+
     @Override
     public void alteraCliente(String email, ClienteAlteracaoRequest clienteAlteracaoRequest) {
         log.info("[start] ClienteApplicationService - alteraCliente");
@@ -50,4 +71,12 @@ public class ClienteApplicationService implements ClienteService{
         log.info("[finish] UsuarioApplicationService - buscaPorEmail");
         return ClienteList.converte(cliente);
     }
+
+//    @Override
+//    public ClienteRequest buscaPorEmail(String email) {
+//        log.info("[start] UsuarioApplicationService - buscaPorEmail");
+//        Cliente cliente = clienteRepository.buscaPorEmail(email);
+//        log.info("[finish] UsuarioApplicationService - buscaPorEmail");
+//        return new ClienteRequest(cliente);
+//    }
 }

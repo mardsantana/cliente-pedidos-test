@@ -21,7 +21,7 @@ public class ClienteController {
     @ResponseStatus(code = HttpStatus.CREATED)
     ClienteResponse postCliente(@Valid @RequestBody ClienteRequest clienteRequest) {
         log.info("[start] ClienteController - postCliente");
-        ClienteResponse clienteCriado = clienteService.criaUsuario(clienteRequest);
+        ClienteResponse clienteCriado = clienteService.criaCliente(clienteRequest);
         log.info("[finish] ClienteController - postCliente");
         return clienteCriado;
     }

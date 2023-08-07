@@ -18,9 +18,9 @@ public class ClienteInfraRepository implements ClienteRepository {
 
     @Override
     public Cliente save(Cliente cliente) {
-        log.info("[start] FormularioInfraRepository - save");
+        log.info("[start] ClienteInfraRepository - save");
         clienteSpringDataJPARepository.save(cliente);
-        log.info("[finish] FormularioInfraRepository - save");
+        log.info("[finish] ClienteInfraRepository - save");
         return cliente;
     }
     @Override
@@ -46,4 +46,13 @@ public class ClienteInfraRepository implements ClienteRepository {
         return clientesGerais;
 
     }
+    // Parte do PedidosApplicationService
+//    @Override
+//    public Cliente buscaPorEmail(String email) {
+//        log.info("[start] ClienteInfraRepository - buscaPorEmail");
+//        Cliente cliente = (Cliente) clienteSpringDataJPARepository.findByEmail(email)
+//                .orElseThrow(() -> new RuntimeException("Pedido do Cliente não encontrado!"));
+//        log.info("[finish] ClienteInfraRepository - buscaPorEmail");
+//        return cliente;
+//    }
 }

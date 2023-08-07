@@ -1,5 +1,7 @@
 package br.com.clientepedidos.clientepedidos.cliente.application.api;
 
+import br.com.clientepedidos.clientepedidos.cliente.application.pedidos.Pedidos;
+import br.com.clientepedidos.clientepedidos.cliente.application.pedidos.PedidosRequest;
 import br.com.clientepedidos.clientepedidos.cliente.domain.Cliente;
 import br.com.clientepedidos.clientepedidos.cliente.domain.Sexo;
 import lombok.Value;
@@ -16,6 +18,7 @@ public class ClienteList {
     private String email;
     private String telefone;
     private Sexo sexo;
+    private List<Pedidos> pedidos;
 
     public ClienteList(Cliente cliente) {
         this.idCliente = cliente.getIdCliente();
@@ -23,8 +26,11 @@ public class ClienteList {
         this.email = cliente.getEmail();
         this.telefone = cliente.getTelefone();
         this.sexo = cliente.getSexo();
+        this.pedidos = cliente.getPedidos();
     }
     public static List<ClienteList> converte(List<Cliente> cliente) {
-        return cliente.stream().map(ClienteList::new).collect(Collectors.toList());
+        return cliente.stream()
+                .map(ClienteList::new)
+                .collect(Collectors.toList());
     }
 }
