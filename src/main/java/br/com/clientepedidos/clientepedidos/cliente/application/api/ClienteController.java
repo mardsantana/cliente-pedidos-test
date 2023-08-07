@@ -43,11 +43,18 @@ public class ClienteController {
     }
     @GetMapping(value = "/{email}")
     @ResponseStatus(code = HttpStatus.OK)
-    List<ClienteList> listaClientePorEmail(){
+    List<ClienteList> listaClientePorEmail(String email){
         log.info("[start] ClienteController - listaCliente");
-        List<ClienteList> cliente = clienteService.listaClientePorEmail();
+        List<ClienteList> cliente = clienteService.clientePorEmail(email);
         log.info("[finish] ClienteController - listaCliente");
         return cliente;
     }
+    @GetMapping
+    @ResponseStatus(code = HttpStatus.OK)
+    List<ClienteList> buscaTodosClientes(){
+        log.info("[start] ClienteController - buscaTodosClientes");
+        List<ClienteList> clientes = clienteService.todosOsClientes();
+        log.info("[finish] ClienteController - buscaTodosClientes");
+        return clientes;
+    }
 }
-//    Permitir o cadastro, alteração, deleção e consulta de clientes.

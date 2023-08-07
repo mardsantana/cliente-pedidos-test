@@ -1,13 +1,10 @@
-package br.com.clientepedidos.clientepedidos.cliente.application.pedidos;
+package br.com.clientepedidos.clientepedidos.pedidos.domain;
 
+import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosRequest;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -21,17 +18,18 @@ public class Pedidos {
     private UUID idPedidos;
     @NotBlank
     private String pedido;
-    @NotBlank
-    private String endereco;
     private Integer quantidade;
-    private LocalDate dataPedido;
     private Integer numeroPedido;
 
     public Pedidos(PedidosRequest pedidosRequest) {
         this.pedido = pedidosRequest.getPedido();
-        this.endereco = pedidosRequest.getEndereco();
         this.quantidade = pedidosRequest.getQuantidade();
-        this.dataPedido = pedidosRequest.getDataPedido();
+        this.numeroPedido = pedidosRequest.getNumeroPedido();
+    }
+
+    public Pedidos(String email, PedidosRequest pedidosRequest) {
+        this.pedido = pedidosRequest.getPedido();
+        this.quantidade = pedidosRequest.getQuantidade();
         this.numeroPedido = pedidosRequest.getNumeroPedido();
     }
 }

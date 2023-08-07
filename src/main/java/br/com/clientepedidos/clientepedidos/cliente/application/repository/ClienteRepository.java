@@ -9,5 +9,5 @@ public interface ClienteRepository {
     Cliente buscarClientePorEmail(String email);
     void deleteCliente(Cliente cliente);
     List<Cliente> listaClientePorEmail();
-//    Cliente buscaPorEmail(String email);
+    List<Cliente> listaClientes();
 }

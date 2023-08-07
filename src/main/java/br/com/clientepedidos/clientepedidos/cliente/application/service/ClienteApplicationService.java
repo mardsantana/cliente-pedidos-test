@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -21,33 +22,12 @@ public class ClienteApplicationService implements ClienteService{
     private final ClienteRepository clienteRepository;
 
     @Override
-    public ClienteResponse criaCliente(ClienteRequest clienteRequest) {
-        log.info("[start] ClienteApplicationService - criaUsuario");
-        Cliente cliente1 = new Cliente(clienteRequest);
-        log.info("cliente1 = {}", cliente1);
-        Cliente cliente = clienteRepository.save(cliente1);
-        log.info("clienteFinal = {}", cliente);
-        log.info("[finish] ClienteApplicationService - criaUsuario");
+    public ClienteResponse criaCliente(@Valid ClienteRequest clienteRequest) {
+        log.info("[start] ClienteApplicationService - criaCliente");
+        Cliente cliente = clienteRepository.save(new Cliente(clienteRequest));
+        log.info("[finish] ClienteApplicationService - criaCliente");
         return ClienteResponse.builder().idCliente(cliente.getIdCliente()).build();
     }
-
-//    log.info("[start] GerenciadorApplicationService - criaCadastro");
-//    Gerenciador gerenciador1 = new Gerenciador(gerenciadorRequest);
-//    log.info("gerenciador1 = {}", gerenciador1);
-//    Gerenciador gerenciador = gerenciadorRepository.save(gerenciador1);
-//    log.info("gerenciadorFinal = {}", gerenciador);
-//    log.info("[finish] GerenciadorApplicationService - criaCadastro");
-//    return GerenciadorResponse.builder().idAnimal(gerenciador.getIdAnimal()).build();
-
-
-
-
-
-
-
-
-
-
     @Override
     public void alteraCliente(String email, ClienteAlteracaoRequest clienteAlteracaoRequest) {
         log.info("[start] ClienteApplicationService - alteraCliente");
@@ -63,20 +43,18 @@ public class ClienteApplicationService implements ClienteService{
         clienteRepository.deleteCliente(cliente);
         log.info("[finish] UsuarioApplicationService - deleteClientePorEmail");
     }
-
     @Override
-    public List<ClienteList> listaClientePorEmail() {
-        log.info("[start] UsuarioApplicationService - buscaPorEmail");
+    public List<ClienteList> clientePorEmail(String email) {
+        log.info("[start] UsuarioApplicationService - clientePorEmail");
         List<Cliente> cliente = clienteRepository.listaClientePorEmail();
-        log.info("[finish] UsuarioApplicationService - buscaPorEmail");
+        log.info("[finish] UsuarioApplicationService - clientePorEmail");
         return ClienteList.converte(cliente);
     }
-
-//    @Override
-//    public ClienteRequest buscaPorEmail(String email) {
-//        log.info("[start] UsuarioApplicationService - buscaPorEmail");
-//        Cliente cliente = clienteRepository.buscaPorEmail(email);
-//        log.info("[finish] UsuarioApplicationService - buscaPorEmail");
-//        return new ClienteRequest(cliente);
-//    }
+    @Override
+    public List<ClienteList> todosOsClientes() {
+        log.info("[start] UsuarioApplicationService - todosOsClientes");
+        List<Cliente> cliente = clienteRepository.listaClientes();
+        log.info("[finish] UsuarioApplicationService - todosOsClientes");
+        return ClienteList.converte(cliente);
+    }
 }
