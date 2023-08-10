@@ -44,9 +44,9 @@ public class ClienteController {
     @GetMapping(value = "/{email}")
     @ResponseStatus(code = HttpStatus.OK)
     List<ClienteList> listaClientePorEmail(String email){
-        log.info("[start] ClienteController - listaCliente");
+        log.info("[start] ClienteController - listaClientePorEmail");
         List<ClienteList> cliente = clienteService.clientePorEmail(email);
-        log.info("[finish] ClienteController - listaCliente");
+        log.info("[finish] ClienteController - listaClientePorEmail");
         return cliente;
     }
     @GetMapping
