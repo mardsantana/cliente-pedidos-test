@@ -8,8 +8,7 @@ import javax.validation.constraints.NotBlank;
 @Value
 public class PedidosRequest {
 
-    @NotBlank
-    private String pedido;
+    private String pedidos;
     private Integer quantidade;
     private Integer numeroPedido;
 }

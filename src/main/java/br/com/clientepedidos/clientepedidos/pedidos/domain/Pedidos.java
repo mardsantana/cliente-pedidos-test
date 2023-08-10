@@ -16,20 +16,24 @@ public class Pedidos {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idPedidos;
-    @NotBlank
-    private String pedido;
+    private String pedidos;
     private Integer quantidade;
     private Integer numeroPedido;
 
     public Pedidos(PedidosRequest pedidosRequest) {
-        this.pedido = pedidosRequest.getPedido();
+        this.pedidos = pedidosRequest.getPedidos();
         this.quantidade = pedidosRequest.getQuantidade();
         this.numeroPedido = pedidosRequest.getNumeroPedido();
     }
 
     public Pedidos(String email, PedidosRequest pedidosRequest) {
-        this.pedido = pedidosRequest.getPedido();
+        this.pedidos = pedidosRequest.getPedidos();
         this.quantidade = pedidosRequest.getQuantidade();
         this.numeroPedido = pedidosRequest.getNumeroPedido();
+    }
+    public Pedidos(Pedidos pedidos) {
+        this.pedidos = pedidos.getPedidos();
+        this.quantidade = pedidos.getQuantidade();
+        this.numeroPedido = pedidos.getNumeroPedido();
     }
 }

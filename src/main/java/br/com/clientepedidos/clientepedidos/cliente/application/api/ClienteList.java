@@ -1,6 +1,7 @@
 package br.com.clientepedidos.clientepedidos.cliente.application.api;
 
 import br.com.clientepedidos.clientepedidos.cliente.domain.Cliente;
+import br.com.clientepedidos.clientepedidos.pedidos.domain.Pedidos;
 import lombok.Value;
 
 
@@ -14,12 +15,14 @@ public class ClienteList {
     private String nome;
     private String email;
     private String telefone;
+    private List<Pedidos> pedidos;
 
     public ClienteList(Cliente cliente) {
         this.idCliente = cliente.getIdCliente();
         this.nome = cliente.getNome();
         this.email = cliente.getEmail();
         this.telefone = cliente.getTelefone();
+        this.pedidos = cliente.getPedidos();
     }
     public static List<ClienteList> converte(List<Cliente> cliente) {
         return cliente.stream()
