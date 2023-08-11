@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /pedidos/api
+    context-path: /cliente-pedidos/api
 
 spring:
   datasource:

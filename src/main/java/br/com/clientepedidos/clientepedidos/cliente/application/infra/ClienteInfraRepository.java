@@ -3,8 +3,11 @@ package br.com.clientepedidos.clientepedidos.cliente.application.infra;
 
 import br.com.clientepedidos.clientepedidos.cliente.application.repository.ClienteRepository;
 import br.com.clientepedidos.clientepedidos.cliente.domain.Cliente;
+import br.com.clientepedidos.clientepedidos.cliente.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,37 +22,34 @@ public class ClienteInfraRepository implements ClienteRepository {
     @Override
     public Cliente save(Cliente cliente) {
         log.info("[start] ClienteInfraRepository - save");
-        clienteSpringDataJPARepository.save(cliente);
+        try {
+            clienteSpringDataJPARepository.save(cliente);
+        } catch (DataIntegrityViolationException e){
+            throw APIException.build(HttpStatus.BAD_REQUEST,"Existem dados duplicados", e);
+        }
         log.info("[finish] ClienteInfraRepository - save");
         return cliente;
     }
     @Override
-    public Cliente buscarClientePorEmail(String email) {
-        log.info("[start] ClienteInfraRepository - buscarClientePorEmail");
-        Cliente cliente = (Cliente) clienteSpringDataJPARepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
-        log.info("[finish] ClienteInfraRepository - buscarClientePorEmail");
+    public Cliente buscaClientePorNome(String nome) {
+        log.info("[start] ClienteInfraRepository - buscaClientePorNome");
+        Cliente cliente = (Cliente) clienteSpringDataJPARepository.findByNome(nome)
+                .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não Encontrado!!!"));
+        log.info("[finish] ClienteInfraRepository - buscaClientePorNome");
         return cliente;
     }
     @Override
     public void deleteCliente(Cliente cliente) {
-        log.info("[start] ClienteInfraRepository - deletaCliente");
+        log.info("[start] ClienteInfraRepository - deleteCliente");
         clienteSpringDataJPARepository.delete(cliente);
-        log.info("[finish] ClienteInfraRepository - deletaCliente");
+        log.info("[finish] ClienteInfraRepository - deleteCliente");
     }
     @Override
-    public List<Cliente> listaClientePorEmail() {
-        log.info("[start] ClienteInfraRepository - buscarPorEmail");
+    public List<Cliente> buscaClientesGerais() {
+        log.info("[start] ClienteInfraRepository - buscaClientesGerais");
         List<Cliente> clientesGerais = clienteSpringDataJPARepository.findAll();
-        log.info("[finish] ClienteInfraRepository - buscarPorEmail");
+        log.info("[finish] ClienteInfraRepository - buscaClientesGerais");
         return clientesGerais;
-
-    }
-    @Override
-    public List<Cliente> listaClientes() {
-        log.info("[start] ClienteInfraRepository - listaClientes");
-        List<Cliente> todosClientes = clienteSpringDataJPARepository.findAll();
-        log.info("[finish] ClienteInfraRepository - listaClientes");
-        return todosClientes;
     }
 }
+
