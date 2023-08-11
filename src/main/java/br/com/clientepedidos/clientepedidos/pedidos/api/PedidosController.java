@@ -1,7 +1,6 @@
 package br.com.clientepedidos.clientepedidos.pedidos.api;
 
-import br.com.clientepedidos.clientepedidos.cliente.application.api.ClienteList;
-import br.com.clientepedidos.clientepedidos.pedidos.service.PedidosService;
+import br.com.clientepedidos.clientepedidos.pedidos.domain.Pedidos;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -12,28 +11,28 @@ import java.util.List;
 
 @RestController
 @Log4j2
-@RequestMapping("/cliente/pedido")
+@RequestMapping("/cliente/pedidos")
 @RequiredArgsConstructor
 public class PedidosController {
 
     private final PedidosService pedidosService;
 
-    @PostMapping(value = "/{email}")
+    //O método em questão Cria e Salva os Pedidos
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    PedidosResponse postPedidos(@PathVariable String email,
-                                @Valid @RequestBody PedidosRequest pedidosRequest) {
+    PedidosResponse postPedidos(@Valid @RequestBody PedidosRequest pedidosRequest) {
         log.info("[start] PedidosController -  postPedidos");
-        log.info("[email] {}", email);
-        PedidosResponse pedidoCriado = pedidosService.criaPedidos(email, pedidosRequest);
+        PedidosResponse pedidoCriado = pedidosService.criaPedidos(pedidosRequest);
         log.info("[finish] PedidosController -  postPedidos");
         return pedidoCriado;
     }
-    @GetMapping(value = "/{email}")
+    //O método em questão, busca e lista o pedido pelo número do pedido
+    @GetMapping(value = "/{numeroPedido}")
     @ResponseStatus(code = HttpStatus.OK)
-    List<PedidosList> listaPedidosPorEmail(String email){
-        log.info("[start] PedidosController - listaPorEmail");
-        List<PedidosList> pedidos = pedidosService.pedidosPorEmail(email);
-        log.info("[finish] PedidosController - listaPorEmail");
-        return pedidos;
+    List<PedidosListResponse> getBuscaPorNumeroPedido(){
+        log.info("[start] PedidosController -  getBuscaPorNumeroPedido");
+        List<PedidosListResponse> buscaPedidos = pedidosService.buscaPorNumeroPedidos();
+        log.info("[finsih] PedidosController -  getBuscaPorNumeroPedido");
+        return buscaPedidos;
     }
 }

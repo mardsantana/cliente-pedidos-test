@@ -1,15 +1,9 @@
 package br.com.clientepedidos.clientepedidos.pedidos.api;
 
-import lombok.Getter;
 import lombok.Value;
 
-import javax.validation.constraints.NotBlank;
-
-
-@Getter
-public class PedidosRequest {
-
+@Value
+public class PedidosAlteracaoRequest {
     private String pedidos;
     private Integer quantidade;
-    private Integer numeroPedido;
 }

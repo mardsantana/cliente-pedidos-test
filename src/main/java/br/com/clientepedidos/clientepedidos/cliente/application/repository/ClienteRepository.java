@@ -6,8 +6,7 @@ import java.util.List;
 
 public interface ClienteRepository {
     Cliente save(Cliente cliente);
-    Cliente buscarClientePorEmail(String email);
+    Cliente buscaClientePorNome(String nome);
     void deleteCliente(Cliente cliente);
-    List<Cliente> listaClientePorEmail();
-    List<Cliente> listaClientes();
+    List<Cliente> buscaClientesGerais();
 }

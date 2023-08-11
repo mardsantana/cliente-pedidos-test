@@ -2,6 +2,7 @@ package br.com.clientepedidos.clientepedidos.cliente.application.api;
 
 import br.com.clientepedidos.clientepedidos.cliente.application.service.ClienteService;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,36 +26,38 @@ public class ClienteController {
         log.info("[finish] ClienteController - postCliente");
         return clienteCriado;
     }
-    @PatchMapping(value = "/{email}")
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    void alteraCliente(@PathVariable String email, @Valid @RequestBody ClienteAlteracaoRequest clienteAlteracaoRequest){
-        log.info("[start] ClienteController - alteraCliente");
-        log.info("[email]{}", email);
-        clienteService.alteraCliente(email, clienteAlteracaoRequest);
-        log.info("[finish] ClienteController - alteraCliente");
-    }
-    @DeleteMapping(value = "/{email}")
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    void deleteClientePorEmail(@PathVariable String email) {
-        log.info("[start] ClienteController - deleteClientePorEmail");
-        log.info("[email]{}", email);
-        clienteService.deleteClientePorEmail(email);
-        log.info("[finish] ClienteController - deleteClientePorEmail");
-    }
-    @GetMapping(value = "/{email}")
+    @GetMapping(value = "/{nome}")
     @ResponseStatus(code = HttpStatus.OK)
-    List<ClienteList> listaClientePorEmail(String email){
-        log.info("[start] ClienteController - listaClientePorEmail");
-        List<ClienteList> cliente = clienteService.clientePorEmail(email);
-        log.info("[finish] ClienteController - listaClientePorEmail");
-        return cliente;
+    ClienteDetalhadoResponse buscaPorNome(@PathVariable String nome){
+        log.info("[start] ClienteController - buscaPorNome");
+        log.info("[nome] {}", nome);
+        ClienteDetalhadoResponse clienteDetalhado = clienteService.buscaClientePorNome(nome);
+        log.info("[finish] ClienteController - buscaPorNome");
+        return clienteDetalhado;
+    }
+    @DeleteMapping(value = "/{nome}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    void deletePorNome(@PathVariable String nome){
+        log.info("[start] ClienteController - deletePorNome");
+        log.info("[nome] {}", nome);
+        clienteService.deleteClientePorNome(nome);
+        log.info("[finish] ClienteController - deletePorNome");
     }
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    List<ClienteList> buscaTodosClientes(){
-        log.info("[start] ClienteController - buscaTodosClientes");
-        List<ClienteList> clientes = clienteService.todosOsClientes();
-        log.info("[finish] ClienteController - buscaTodosClientes");
+    List<ClienteListResponse> buscaClientesGerais(){
+        log.info("[start] ClienteController - buscaClientesGerais");
+        List<ClienteListResponse> clientes = clienteService.buscaClientesGerais();
+        log.info("[finish] ClienteController - buscaClientesGerais");
         return clientes;
+    }
+    @PatchMapping(value = "/{nome}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    void patchCliente(@PathVariable String nome,
+                      @Valid @RequestBody ClienteAlteracaoRequest clienteAlteracaoRequest){
+        log.info("[start] ClienteController - patchCliente");
+        log.info("[nome]{}", nome);
+        clienteService.alteraCliente(nome, clienteAlteracaoRequest);
+        log.info("[finish] ClienteController - patchCliente");
     }
 }
