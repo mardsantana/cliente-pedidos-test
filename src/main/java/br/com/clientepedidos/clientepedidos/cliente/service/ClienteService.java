@@ -1,7 +1,7 @@
-package br.com.clientepedidos.clientepedidos.cliente.application.service;
+package br.com.clientepedidos.clientepedidos.cliente.service;
 
 
-import br.com.clientepedidos.clientepedidos.cliente.application.api.*;
+import br.com.clientepedidos.clientepedidos.cliente.api.*;
 
 import javax.validation.Valid;
 import java.util.List;

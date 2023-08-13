@@ -1,9 +1,9 @@
 package br.com.clientepedidos.clientepedidos.cliente.domain;
 
 
-import br.com.clientepedidos.clientepedidos.cliente.application.api.ClienteAlteracaoRequest;
-import br.com.clientepedidos.clientepedidos.cliente.application.api.ClienteRequest;
-import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosList;
+import br.com.clientepedidos.clientepedidos.cliente.api.ClienteAlteracaoRequest;
+import br.com.clientepedidos.clientepedidos.cliente.api.ClienteRequest;
+import br.com.clientepedidos.clientepedidos.entregas.EntregasRequest;
 import br.com.clientepedidos.clientepedidos.pedidos.domain.Pedidos;
 import lombok.*;
 

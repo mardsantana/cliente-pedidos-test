@@ -1,4 +1,4 @@
-package br.com.clientepedidos.clientepedidos.cliente.application.repository;
+package br.com.clientepedidos.clientepedidos.cliente.repository;
 
 import br.com.clientepedidos.clientepedidos.cliente.domain.Cliente;
 

@@ -1,6 +1,6 @@
 package br.com.clientepedidos.clientepedidos.pedidos.domain;
 
-import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosList;
+import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosAlteracaoRequest;
 import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosRequest;
 import lombok.*;
 
@@ -28,22 +28,13 @@ public class Pedidos {
         this.quantidade = pedidosRequest.getQuantidade();
         this.numeroPedido = pedidosRequest.getNumeroPedido();
     }
-
-    public Pedidos(String email, PedidosRequest pedidosRequest) {
-        this.pedidos = pedidosRequest.getPedidos();
-        this.quantidade = pedidosRequest.getQuantidade();
-        this.numeroPedido = pedidosRequest.getNumeroPedido();
-    }
-
     public Pedidos(Pedidos pedidos) {
         this.pedidos = pedidos.getPedidos();
         this.quantidade = pedidos.getQuantidade();
         this.numeroPedido = pedidos.getNumeroPedido();
     }
-
-    public Pedidos(PedidosList pedidosList) {
-        this.pedidos = pedidosList.getPedidos();
-        this.quantidade = pedidosList.getQuantidade();
-        this.numeroPedido = pedidosList.getNumeroPedido();
+    public void altera(PedidosAlteracaoRequest pedidosAlteracaoRequest) {
+        this.pedidos = pedidosAlteracaoRequest.getPedidos();
+        this.quantidade = pedidosAlteracaoRequest.getQuantidade();
     }
 }

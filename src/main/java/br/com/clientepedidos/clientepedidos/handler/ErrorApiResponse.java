@@ -1,4 +1,4 @@
-package br.com.clientepedidos.clientepedidos.cliente.handler;
+package br.com.clientepedidos.clientepedidos.handler;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

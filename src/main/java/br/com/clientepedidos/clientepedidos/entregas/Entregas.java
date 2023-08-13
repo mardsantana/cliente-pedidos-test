@@ -26,4 +26,9 @@ public class Entregas {
     @NotBlank
     private String referencia;
 
+    public Entregas(EntregasRequest entregasRequest) {
+        this.nomeRua = entregasRequest.getNomeRua();
+        this.numeroCasa = entregasRequest.getNumeroCasa();
+        this.referencia = entregasRequest.getReferencia();
+    }
 }

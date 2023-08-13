@@ -1,4 +1,4 @@
-package br.com.clientepedidos.clientepedidos.cliente.application.api;
+package br.com.clientepedidos.clientepedidos.cliente.api;
 
 import lombok.Builder;
 import lombok.Value;

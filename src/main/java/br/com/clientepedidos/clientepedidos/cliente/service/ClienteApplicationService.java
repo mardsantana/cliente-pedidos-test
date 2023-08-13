@@ -1,8 +1,8 @@
-package br.com.clientepedidos.clientepedidos.cliente.application.service;
+package br.com.clientepedidos.clientepedidos.cliente.service;
 
 
-import br.com.clientepedidos.clientepedidos.cliente.application.api.*;
-import br.com.clientepedidos.clientepedidos.cliente.application.repository.ClienteRepository;
+import br.com.clientepedidos.clientepedidos.cliente.api.*;
+import br.com.clientepedidos.clientepedidos.cliente.repository.ClienteRepository;
 import br.com.clientepedidos.clientepedidos.cliente.domain.Cliente;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

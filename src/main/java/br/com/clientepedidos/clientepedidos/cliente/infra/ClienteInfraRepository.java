@@ -1,9 +1,9 @@
-package br.com.clientepedidos.clientepedidos.cliente.application.infra;
+package br.com.clientepedidos.clientepedidos.cliente.infra;
 
 
-import br.com.clientepedidos.clientepedidos.cliente.application.repository.ClienteRepository;
+import br.com.clientepedidos.clientepedidos.cliente.repository.ClienteRepository;
 import br.com.clientepedidos.clientepedidos.cliente.domain.Cliente;
-import br.com.clientepedidos.clientepedidos.cliente.handler.APIException;
+import br.com.clientepedidos.clientepedidos.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -33,7 +33,7 @@ public class ClienteInfraRepository implements ClienteRepository {
     @Override
     public Cliente buscaClientePorNome(String nome) {
         log.info("[start] ClienteInfraRepository - buscaClientePorNome");
-        Cliente cliente = (Cliente) clienteSpringDataJPARepository.findByNome(nome)
+        Cliente cliente = clienteSpringDataJPARepository.findByNome(nome)
                 .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não Encontrado!!!"));
         log.info("[finish] ClienteInfraRepository - buscaClientePorNome");
         return cliente;
