@@ -1,5 +1,6 @@
-package br.com.clientepedidos.clientepedidos.entregas;
+package br.com.clientepedidos.clientepedidos.entregas.domain;
 
+import br.com.clientepedidos.clientepedidos.entregas.api.EntregasRequest;
 import lombok.*;
 
 import javax.persistence.Entity;

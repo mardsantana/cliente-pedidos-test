@@ -1,11 +1,14 @@
-package br.com.clientepedidos.clientepedidos.entregas;
+package br.com.clientepedidos.clientepedidos.entregas.api;
 
+import br.com.clientepedidos.clientepedidos.entregas.service.EntregasService;
+import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosListResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cliente/entregas")
@@ -23,5 +26,12 @@ public class EntregasController {
         log.info("[finish] EntregasController - postEntregas");
         return entregasCriado;
     }
-
+    @GetMapping
+    @ResponseStatus(code = HttpStatus.OK)
+    List<EntregasListResponse> buscaEntregasGerais(){
+        log.info("[start] EntregasController - buscaEntregasGerais");
+        List<EntregasListResponse> entregasGerais = entregasService.buscaEntregasGerais();
+        log.info("[finish] EntregasController - buscaEntregasGerais");
+        return entregasGerais;
+    }
 }
