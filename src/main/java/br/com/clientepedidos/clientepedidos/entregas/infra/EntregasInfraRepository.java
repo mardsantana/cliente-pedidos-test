@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @Log4j2
@@ -37,5 +38,19 @@ public class EntregasInfraRepository implements EntregasRepository {
         List<Entregas> entregasGerais = entregasSpringDataJPARepository.findAll();
         log.info("[finsih] EntregasInfraRepository - buscaEntregasGerais");
         return entregasGerais;
+    }
+    @Override
+    public Entregas buscaEntregaPorID(UUID idEntregas) {
+        log.info("[start] EntregasInfraRepository - buscaEntregaPorID");
+        Entregas entregas = entregasSpringDataJPARepository.findById(idEntregas)
+                        .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Entrega Não Encontrada!!"));
+        log.info("[finish] EntregasInfraRepository - buscaEntregaPorID");
+        return entregas;
+    }
+    @Override
+    public void deleteEntrega(Entregas entregas) {
+        log.info("[start] EntregasInfraRepository - deleteEntrega");
+        entregasSpringDataJPARepository.delete(entregas);
+        log.info("[finish] EntregasInfraRepository - deleteEntrega");
     }
 }
