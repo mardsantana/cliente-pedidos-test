@@ -14,13 +14,11 @@ public class ClienteListResponse {
     private String nome;
     private String email;
     private String telefone;
-    private List<Pedidos> pedidos;
     public ClienteListResponse(Cliente cliente) {
         this.idCliente = cliente.getIdCliente();
         this.nome = cliente.getNome();
         this.email = cliente.getEmail();
         this.telefone = cliente.getTelefone();
-        this.pedidos = cliente.getPedidos();
     }
     public static List<ClienteListResponse> converte(List<Cliente> clientes) {
         return clientes.stream()

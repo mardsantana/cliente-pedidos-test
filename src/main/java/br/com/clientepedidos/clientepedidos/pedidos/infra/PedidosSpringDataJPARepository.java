@@ -9,5 +9,4 @@ import java.util.UUID;
 
 public interface PedidosSpringDataJPARepository extends JpaRepository<Pedidos, UUID> {
 
-    Optional<Object> findByNumeroPedido(Integer numeroPedido);
 }

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @Log4j2
@@ -31,9 +32,9 @@ public class PedidosInfraRepository implements PedidosRepository {
         return pedidosGerais;
     }
     @Override
-    public Pedidos buscaPorNumeroPedidos(Integer numeroPedido) {
+    public Pedidos buscaPorID(UUID idPedidos) {
         log.info("[start] PedidosInfraRepository - buscaPorNumeroPedidos");
-        Pedidos pedidos = (Pedidos) pedidosSpringDataJPARepository.findByNumeroPedido(numeroPedido)
+        Pedidos pedidos = pedidosSpringDataJPARepository.findById(idPedidos)
                 .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido Não Encontrado!!"));
         log.info("[finish] PedidosInfraRepository - buscaPorNumeroPedidos");
         return pedidos;

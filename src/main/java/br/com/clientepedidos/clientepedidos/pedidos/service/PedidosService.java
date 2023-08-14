@@ -6,11 +6,12 @@ import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosResponse;
 import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosRequest;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface PedidosService {
-    PedidosResponse criaPedidos(PedidosRequest pedidosRequest);
+    PedidosResponse criaPedidos(UUID idClientePedidos, PedidosRequest pedidosRequest);
     List<PedidosListResponse> buscaPedidosGerais();
-    PedidosListResponse buscaPorNumeroPedidos(Integer numeroPedido);
-    void alteraPedido(Integer numeroPedido, PedidosAlteracaoRequest pedidosAlteracaoRequest);
-    void deletePorNumeroPedido(Integer numeroPedido);
+    PedidosListResponse buscaPorID(UUID idClientePedidos, UUID idPedidos);
+    void alteraPedido(UUID idClientePedidos, UUID idPedidos, PedidosAlteracaoRequest pedidosAlteracaoRequest);
+    void deletePorID(UUID idClientePedidos, UUID idPedidos);
 }

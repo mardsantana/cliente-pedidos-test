@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 public class EntregasRequest {
+
     @NotBlank
     private String nomeRua;
     private Integer numeroCasa;

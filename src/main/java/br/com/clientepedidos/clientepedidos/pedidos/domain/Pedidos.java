@@ -19,11 +19,13 @@ public class Pedidos {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idPedidos;
+    private UUID idClientePedidos;
     private String pedidos;
     private Integer quantidade;
     private Integer numeroPedido;
 
-    public Pedidos(PedidosRequest pedidosRequest) {
+    public Pedidos(UUID idClientePedidos, PedidosRequest pedidosRequest) {
+        this.idClientePedidos = idClientePedidos;
         this.pedidos = pedidosRequest.getPedidos();
         this.quantidade = pedidosRequest.getQuantidade();
         this.numeroPedido = pedidosRequest.getNumeroPedido();

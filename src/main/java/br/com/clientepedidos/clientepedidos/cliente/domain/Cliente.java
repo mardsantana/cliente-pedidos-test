@@ -5,6 +5,7 @@ import br.com.clientepedidos.clientepedidos.cliente.api.ClienteAlteracaoRequest;
 import br.com.clientepedidos.clientepedidos.cliente.api.ClienteRequest;
 import br.com.clientepedidos.clientepedidos.pedidos.domain.Pedidos;
 import lombok.*;
+import org.springframework.stereotype.Indexed;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -26,21 +27,17 @@ public class Cliente {
     @NotBlank
     private String nome;
     @NotBlank
+    private String senha;
     @Email
     private String email;
     @NotBlank
     private String telefone;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pedidos> pedidos;
 
     public Cliente(ClienteRequest clienteRequest) {
         this.nome = clienteRequest.getNome();
+        this.senha = clienteRequest.getSenha();
         this.email = clienteRequest.getEmail();
         this.telefone = clienteRequest.getTelefone();
-        this.pedidos = clienteRequest.getPedidos()
-                .stream()
-                .map(Pedidos::new)
-                .collect(Collectors.toList());
     }
     public void altera(ClienteAlteracaoRequest clienteAlteracaoRequest) {
         this.nome = clienteAlteracaoRequest.getNome();

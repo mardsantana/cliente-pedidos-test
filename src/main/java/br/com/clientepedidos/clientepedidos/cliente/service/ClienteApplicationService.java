@@ -9,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Log4j2
@@ -25,16 +26,16 @@ public class ClienteApplicationService implements ClienteService{
         return ClienteResponse.builder().idCliente(cliente.getIdCliente()).build();
     }
     @Override
-    public ClienteDetalhadoResponse buscaClientePorNome(String nome) {
+    public ClienteDetalhadoResponse buscaClientePorID(UUID idCliente) {
         log.info("[start] ClienteApplicationService - buscaClientePorNome");
-        Cliente cliente = clienteRepository.buscaClientePorNome(nome);
+        Cliente cliente = clienteRepository.buscaClientePorID(idCliente);
         log.info("[finish] ClienteApplicationService - buscaClientePorNome");
         return new ClienteDetalhadoResponse(cliente);
     }
     @Override
-    public void deleteClientePorNome(String nome) {
+    public void deleteClientePorID(UUID idCliente) {
         log.info("[start] ClienteApplicationService - deleteClientePorNome");
-        Cliente cliente = clienteRepository.buscaClientePorNome(nome);
+        Cliente cliente = clienteRepository.buscaClientePorID(idCliente);
         clienteRepository.deleteCliente(cliente);
         log.info("[finish] ClienteApplicationService - deleteClientePorNome");
     }
@@ -47,9 +48,9 @@ public class ClienteApplicationService implements ClienteService{
     }
 
     @Override
-    public void alteraCliente(String nome, ClienteAlteracaoRequest clienteAlteracaoRequest) {
+    public void alteraCliente(UUID idCliente, ClienteAlteracaoRequest clienteAlteracaoRequest) {
         log.info("[start] ClienteApplicationService - alteraCliente");
-        Cliente cliente = clienteRepository.buscaClientePorNome(nome);
+        Cliente cliente = clienteRepository.buscaClientePorID(idCliente);
         cliente.altera(clienteAlteracaoRequest);
         clienteRepository.save(cliente);
         log.info("[finish] ClienteApplicationService - alteraCliente");

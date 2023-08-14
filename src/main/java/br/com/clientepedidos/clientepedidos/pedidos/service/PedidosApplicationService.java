@@ -1,5 +1,6 @@
 package br.com.clientepedidos.clientepedidos.pedidos.service;
 
+import br.com.clientepedidos.clientepedidos.cliente.service.ClienteService;
 import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosAlteracaoRequest;
 import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosListResponse;
 import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosRequest;
@@ -11,6 +12,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -18,12 +20,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PedidosApplicationService implements PedidosService {
 
+    private final ClienteService clienteService;
+
     private final PedidosRepository pedidosRepository;
 
     @Override
-    public PedidosResponse criaPedidos(PedidosRequest pedidosRequest) {
+    public PedidosResponse criaPedidos(UUID idClientePedidos, PedidosRequest pedidosRequest) {
         log.info("[start] PedidosApplicationService - criaPedidos");
-        Pedidos pedidos = pedidosRepository.savePedidos(new Pedidos(pedidosRequest));
+        clienteService.buscaClientePorID(idClientePedidos);
+        Pedidos pedidos = pedidosRepository.savePedidos(new Pedidos(idClientePedidos, pedidosRequest));
         log.info("[finsih] PedidosApplicationService - criaPedidos");
         return PedidosResponse.builder().idPedidos(pedidos.getIdPedidos()).build();
     }
@@ -35,24 +40,27 @@ public class PedidosApplicationService implements PedidosService {
         return PedidosListResponse.converte(pedidos);
     }
     @Override
-    public PedidosListResponse buscaPorNumeroPedidos(Integer numeroPedido) {
-        log.info("[start] PedidosApplicationService - buscaPorNumeroPedidos");
-        Pedidos pedidos = pedidosRepository.buscaPorNumeroPedidos(numeroPedido);
-        log.info("[finish] PedidosApplicationService - buscaPorNumeroPedidos");
+    public PedidosListResponse buscaPorID(UUID idClientePedidos, UUID idPedidos) {
+        log.info("[start] PedidosApplicationService - buscaPorID");
+        clienteService.buscaClientePorID(idClientePedidos);
+        Pedidos pedidos = pedidosRepository.buscaPorID(idPedidos);
+        log.info("[finish] PedidosApplicationService - buscaPorID");
         return new PedidosListResponse(pedidos);
     }
     @Override
-    public void alteraPedido(Integer numeroPedido, PedidosAlteracaoRequest pedidosAlteracaoRequest) {
+    public void alteraPedido(UUID idClientePedidos, UUID idPedidos, PedidosAlteracaoRequest pedidosAlteracaoRequest) {
         log.info("[start] PedidosApplicationService - alteraPedido");
-        Pedidos pedidos = pedidosRepository.buscaPorNumeroPedidos(numeroPedido);
+        clienteService.buscaClientePorID(idClientePedidos);
+        Pedidos pedidos = pedidosRepository.buscaPorID(idPedidos);
         pedidos.altera(pedidosAlteracaoRequest);
         pedidosRepository.savePedidos(pedidos);
         log.info("[finish] PedidosApplicationService - alteraPedido");
     }
     @Override
-    public void deletePorNumeroPedido(Integer numeroPedido) {
+    public void deletePorID(UUID idClientePedidos, UUID idPedidos) {
         log.info("[start] PedidosApplicationService - deletePorNumeroPedido");
-        Pedidos pedidos = pedidosRepository.buscaPorNumeroPedidos(numeroPedido);
+        clienteService.buscaClientePorID(idClientePedidos);
+        Pedidos pedidos = pedidosRepository.buscaPorID(idPedidos);
         pedidosRepository.deletePedido(pedidos);
         log.info("[finish] PedidosApplicationService - deletePorNumeroPedido");
     }

@@ -40,13 +40,15 @@ public class EntregasController {
     @ResponseStatus(code = HttpStatus.OK)
     EntregasListResponse buscaEntregaPorID(@PathVariable UUID idEntregas){
         log.info("[start] EntregasController - buscaEntregaPorID");
+        log.info("[idEntregas] {}",idEntregas);
         EntregasListResponse buscaEntrega = entregasService.buscaEntregaPorID(idEntregas);
         log.info("finish] EntregasController - buscaEntregaPorID");
         return buscaEntrega;
     }
     @PatchMapping(value = "/{idEntregas}")
     @ResponseStatus(code = HttpStatus.OK)
-    void alteraEntrega(@PathVariable UUID idEntregas, @Valid @RequestBody EntregasAlteracaoRequest entregasAlteracaoRequest){
+    void alteraEntrega(@PathVariable UUID idEntregas,
+                       @Valid @RequestBody EntregasAlteracaoRequest entregasAlteracaoRequest){
         log.info("[start] EntregasController - alteraEntrega");
         log.info("[idEntregas] {}", idEntregas);
         entregasService.alteraEntrega(idEntregas, entregasAlteracaoRequest);
@@ -56,7 +58,7 @@ public class EntregasController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     void deleteEntregasID(@PathVariable UUID idEntregas){
         log.info("[start] EntregasController - deleteEntregasID");
-        log.info("[idEntregas] {}", idEntregas);
+        log.info("[idEntregas] {}",idEntregas);
         entregasService.deleteEntregasID(idEntregas);
         log.info("[start] EntregasController - deleteEntregasID");
     }

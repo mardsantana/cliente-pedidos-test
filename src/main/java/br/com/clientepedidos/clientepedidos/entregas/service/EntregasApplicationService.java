@@ -7,9 +7,7 @@ import br.com.clientepedidos.clientepedidos.entregas.repository.EntregasReposito
 import br.com.clientepedidos.clientepedidos.entregas.api.EntregasRequest;
 import br.com.clientepedidos.clientepedidos.entregas.api.EntregasResponse;
 import br.com.clientepedidos.clientepedidos.entregas.domain.Entregas;
-import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosAlteracaoRequest;
-import br.com.clientepedidos.clientepedidos.pedidos.api.PedidosListResponse;
-import br.com.clientepedidos.clientepedidos.pedidos.domain.Pedidos;
+import br.com.clientepedidos.clientepedidos.pedidos.service.PedidosService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -21,6 +19,8 @@ import java.util.UUID;
 @Log4j2
 @RequiredArgsConstructor
 public class EntregasApplicationService implements EntregasService {
+
+    private final PedidosService pedidosService;
 
     private final EntregasRepository entregasRepository;
 
@@ -45,7 +45,6 @@ public class EntregasApplicationService implements EntregasService {
         log.info("[finish] EntregasApplicationService - buscaEntregaPorID");
         return new EntregasListResponse(entregas);
     }
-
     @Override
     public void alteraEntrega(UUID idEntregas, EntregasAlteracaoRequest entregasAlteracaoRequest) {
         log.info("[start] EntregasApplicationService - alteraEntrega");
@@ -54,7 +53,6 @@ public class EntregasApplicationService implements EntregasService {
         entregasRepository.saveEntregas(entregas);
         log.info("[finish] EntregasApplicationService - alteraEntrega");
     }
-
     @Override
     public void deleteEntregasID(UUID idEntregas) {
         log.info("[start] EntregasApplicationService - deleteEntregasID");

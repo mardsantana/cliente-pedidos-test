@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @Log4j2
@@ -25,21 +26,21 @@ public class ClienteController {
         log.info("[finish] ClienteController - postCliente");
         return clienteCriado;
     }
-    @GetMapping(value = "/{nome}")
+    @GetMapping(value = "/{idCliente}")
     @ResponseStatus(code = HttpStatus.OK)
-    ClienteDetalhadoResponse buscaPorNome(@PathVariable String nome){
-        log.info("[start] ClienteController - buscaPorNome");
-        log.info("[nome] {}", nome);
-        ClienteDetalhadoResponse clienteDetalhado = clienteService.buscaClientePorNome(nome);
-        log.info("[finish] ClienteController - buscaPorNome");
+    ClienteDetalhadoResponse buscaPorID(@PathVariable UUID idCliente){
+        log.info("[start] ClienteController - buscaPorID");
+        log.info("[idCliente] {}", idCliente);
+        ClienteDetalhadoResponse clienteDetalhado = clienteService.buscaClientePorID(idCliente);
+        log.info("[finish] ClienteController - buscaPorID");
         return clienteDetalhado;
     }
-    @DeleteMapping(value = "/{nome}")
+    @DeleteMapping(value = "/{idCliente}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    void deletePorNome(@PathVariable String nome){
+    void deletePorID(@PathVariable UUID idCliente){
         log.info("[start] ClienteController - deletePorNome");
-        log.info("[nome] {}", nome);
-        clienteService.deleteClientePorNome(nome);
+        log.info("[idCliente] {}", idCliente);
+        clienteService.deleteClientePorID(idCliente);
         log.info("[finish] ClienteController - deletePorNome");
     }
     @GetMapping
@@ -50,13 +51,13 @@ public class ClienteController {
         log.info("[finish] ClienteController - buscaClientesGerais");
         return clientes;
     }
-    @PatchMapping(value = "/{nome}")
+    @PatchMapping(value = "/{idCliente}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    void patchCliente(@PathVariable String nome,
+    void patchCliente(@PathVariable UUID idCliente,
                       @Valid @RequestBody ClienteAlteracaoRequest clienteAlteracaoRequest) {
         log.info("[start] ClienteController - patchCliente");
-        log.info("[nome]{}", nome);
-        clienteService.alteraCliente(nome, clienteAlteracaoRequest);
+        log.info("[idCliente]{}", idCliente);
+        clienteService.alteraCliente(idCliente, clienteAlteracaoRequest);
         log.info("[finish] ClienteController - patchCliente");
     }
 }

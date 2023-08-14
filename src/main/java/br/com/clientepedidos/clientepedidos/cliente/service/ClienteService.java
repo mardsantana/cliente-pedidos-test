@@ -5,11 +5,12 @@ import br.com.clientepedidos.clientepedidos.cliente.api.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 public interface ClienteService {
     ClienteResponse criaCliente(@Valid ClienteRequest clienteRequest);
-    ClienteDetalhadoResponse buscaClientePorNome(String nome);
-    void deleteClientePorNome(String nome);
+    ClienteDetalhadoResponse buscaClientePorID(UUID idCliente);
+    void deleteClientePorID(UUID idCliente);
     List<ClienteListResponse> buscaClientesGerais();
-    void alteraCliente(String nome, ClienteAlteracaoRequest clienteAlteracaoRequest);
+    void alteraCliente(UUID idCliente, ClienteAlteracaoRequest clienteAlteracaoRequest);
 }
