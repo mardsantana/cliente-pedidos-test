@@ -26,8 +26,6 @@ public class Cliente {
     private UUID idCliente;
     @NotBlank
     private String nome;
-    @NotBlank
-    private String senha;
     @Email
     private String email;
     @NotBlank
@@ -35,7 +33,6 @@ public class Cliente {
 
     public Cliente(ClienteRequest clienteRequest) {
         this.nome = clienteRequest.getNome();
-        this.senha = clienteRequest.getSenha();
         this.email = clienteRequest.getEmail();
         this.telefone = clienteRequest.getTelefone();
     }

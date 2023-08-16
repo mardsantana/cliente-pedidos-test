@@ -1,5 +1,4 @@
-package br.com.clientepedidos.clientepedidos.autenticacao;
-
+package br.com.clientepedidos.clientepedidos.autenticacao.domain;
 
 import lombok.*;
 
@@ -9,4 +8,5 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Token {
     private String token;
+    private String tipo;
 }
