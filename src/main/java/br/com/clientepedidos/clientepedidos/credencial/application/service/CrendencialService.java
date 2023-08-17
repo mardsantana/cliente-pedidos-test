@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @Slf4j
 public class CrendencialService implements CredencialApplicationService {
 	private final CredencialRepository credencialRepository;
-	
+
 	@Override
 	public void criaNovaCredencial(@Valid ClienteNovoRequest clienteNovoRequest) {
 		log.info("[start] CrendencialService - criaNovaCredencial");
@@ -23,7 +23,7 @@ public class CrendencialService implements CredencialApplicationService {
 		credencialRepository.salva(novaCredencial);
 		log.info("[finish] CrendencialService - criaNovaCredencial");
 	}
-	
+
 	@Override
 	public Credencial buscaCredencialPorUsuario(String usuario) {
 		log.info("[inicia] CredencialSpringDataJpaService - buscaCredencial");

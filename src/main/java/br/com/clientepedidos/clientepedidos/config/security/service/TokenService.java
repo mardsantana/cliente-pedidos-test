@@ -40,7 +40,7 @@ public class TokenService {
                 .signWith(SignatureAlgorithm.HS256, chave)
                 .compact();
         log.info("[finaliza] TokenService - criação de token");
-		return token;
+        return token;
     }
 
     public Optional<String> getUsuario(String token) {

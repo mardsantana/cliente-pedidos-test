@@ -24,11 +24,11 @@ public class Credencial implements UserDetails {
 	private UUID idCredencial;
 	@Getter
 	private String usuario;
-	
+
 	@NotNull
 	@Size(max = 60)
 	private String senha;
-	
+
 	@Getter
 	private boolean validado;
 
@@ -43,7 +43,7 @@ public class Credencial implements UserDetails {
 		var encriptador = new BCryptPasswordEncoder();
 		this.senha = encriptador.encode(this.senha);
 	}
-	
+
 	public void validaCredencial() {
 		this.validado = true;
 	}
@@ -82,6 +82,6 @@ public class Credencial implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-	
+
 	private static final long serialVersionUID = 1L;
 }

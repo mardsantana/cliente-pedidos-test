@@ -5,5 +5,4 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 public interface AutenticacaoApplicationService {
     Token autentica(UsernamePasswordAuthenticationToken userCredentials);
-    Token reativaToken(String tokenExpirado);
 }
